@@ -19,9 +19,9 @@ const toCurve = (length, r) => {
     /**
      * -X 轴顺时针转动的圆心角
      */
-    const w = length / r;
+    const radian = length / r;
     const start = { x: -r, y: 0 };
-    const end = circle_lib_1.circleEdgePoint(circle, w);
+    const end = circle_lib_1.circleEdgePoint(circle, radian);
     return [start, end];
 };
 exports.default = toCurve;

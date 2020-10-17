@@ -16,7 +16,7 @@ import {circleFrom, CircleShape, Point} from '../src/shapes';
 
 const r = 20;
 
-describe.each([
+describe.each<[radian: number, point: [x: number, y: number]]>([
   [Math.PI / 2, [0, r]],
   [(Math.PI * 3) / 2, [0, -r]],
   [Math.PI / 4, [-Math.SQRT1_2 * 20, Math.SQRT1_2 * 20]],
@@ -32,7 +32,7 @@ describe.each([
 
 describe('curve line', () => {
   const r = 20;
-  test.each([
+  test.each<[length: number, pointPair: [start: Point, end: Point]]>([
     [
       (Math.PI * r) / 2,
       [
@@ -47,7 +47,7 @@ describe('curve line', () => {
         {x: -Math.SQRT1_2 * 20, y: Math.SQRT1_2 * 20},
       ],
     ],
-  ])('curve line points passed', (length: number, expected: [Point, Point]) => {
+  ])('curve line points passed', (length, expected) => {
     const points = toCurve(length, r);
     const [start, end] = points;
 
