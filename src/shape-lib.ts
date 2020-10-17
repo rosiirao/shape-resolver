@@ -92,7 +92,7 @@ function getNearestPoint({x, y}: Point, points: [Point, Point]) {
 }
 
 /**
- * 计算某点到某个形状之间的连线与该形状的交点
+ * 计算某点到某个形状中心之间的连线与该形状的交点
  * @param from
  * @param to
  */
@@ -131,7 +131,7 @@ function getCrossPointWithRect(from: Point, to: RectShape) {
   /**
    * half width and half height
    */
-  const [hw, hh] = [w / 2, h / 2];
+  const [halfWidth, halfHeight] = [w / 2, h / 2];
 
   const ratio =
     fx === tx // 0/0 will get NaN
@@ -140,21 +140,24 @@ function getCrossPointWithRect(from: Point, to: RectShape) {
   switch (ratio) {
     case 0:
       return {
-        x: tx + Math.imul(fx > tx ? 1 : -1, hw),
+        x: tx + Math.imul(fx > tx ? 1 : -1, halfWidth),
         y: ty,
       };
     case Infinity:
       return {
         x: tx,
-        y: ty + Math.imul(fy > ty ? 1 : -1, hh),
+        y: ty + Math.imul(fy > ty ? 1 : -1, halfHeight),
       };
     default: {
       // 判断与椭圆边角相交， 或与直线边框相交
-      if (ratio > (hh - ry) / hw && ratio < hh / (hw - rx)) {
+      if (
+        ratio > (halfHeight - ry) / halfWidth &&
+        ratio < halfHeight / (halfWidth - rx)
+      ) {
         // 4 ellipse center
-        const leftTop = {x: tx - hw + rx, y: ty - hh + ry};
-        const rightTop = {x: tx + hw - rx, y: leftTop.y};
-        const leftBottom = {x: leftTop.x, y: ty + hh - ry};
+        const leftTop = {x: tx - halfWidth + rx, y: ty - halfHeight + ry};
+        const rightTop = {x: tx + halfWidth - rx, y: leftTop.y};
+        const leftBottom = {x: leftTop.x, y: ty + halfHeight - ry};
         const rightBottom = {x: rightTop.x, y: leftBottom.y};
 
         /**
@@ -190,12 +193,12 @@ function getCrossPointWithRect(from: Point, to: RectShape) {
       }
       return ratio > h / w
         ? {
-            x: tx + Math.imul(fx > tx ? 1 : -1, hh) / ratio,
-            y: ty + Math.imul(fy > ty ? 1 : -1, hh),
+            x: tx + Math.imul(fx > tx ? 1 : -1, halfHeight) / ratio,
+            y: ty + Math.imul(fy > ty ? 1 : -1, halfHeight),
           }
         : {
-            x: tx + Math.imul(fx > tx ? 1 : -1, hw),
-            y: ty + Math.imul(fy > ty ? 1 : -1, hw) * ratio,
+            x: tx + Math.imul(fx > tx ? 1 : -1, halfWidth),
+            y: ty + Math.imul(fy > ty ? 1 : -1, halfWidth) * ratio,
           };
     }
   }

@@ -21,7 +21,7 @@ export interface RectShape extends Shape {
   dimension: {
     w: number;
     h: number;
-    r: number /* the corner radio */;
+    r: number /* the corner radius */;
   };
 }
 

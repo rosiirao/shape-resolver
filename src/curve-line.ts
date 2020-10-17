@@ -23,9 +23,9 @@ const toCurve: ToCurve = (length, r) => {
   /**
    * -X 轴顺时针转动的圆心角
    */
-  const w = length / r;
+  const radian = length / r;
   const start: Point = {x: -r, y: 0};
-  const end: Point = circleEdgePoint(circle, w);
+  const end: Point = circleEdgePoint(circle, radian);
   return [start, end];
 };
 
