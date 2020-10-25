@@ -20,12 +20,12 @@
     "posttest": "npm run check"
   },
   "devDependencies": {
-    "@types/node": "^14.11.10",
-    "@typescript-eslint/eslint-plugin": "^4.4.1",
-    "@typescript-eslint/parser": "^4.4.1",
+    "@types/node": "^14.14.2",
+    "@typescript-eslint/eslint-plugin": "^4.5.0",
+    "@typescript-eslint/parser": "^4.5.0",
     "gts": "^3.0.1",
-    "jest": "^26.5.3",
-    "ts-jest": "^26.4.1"
+    "jest": "^26.6.1",
+    "ts-jest": "^26.4.2"
   },
   "dependencies": {
     "typescript": "^4.0.3"
